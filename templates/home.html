@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+
+<p1><a href="/calculator/"> calculator </a></p1>
+
+  <p><a href="{% url 'logout' %}">logout</a></p>
+{% else %}
+  <p>You are not logged in</p>
+
+
+
+    <form action="/calculator/" method="post">{% csrf_token %}#}
+<h1>Calculator</h1>
+    First number <input name="first_num" type="text">
+    <select name="operation" id="">
+        {% for operation in  operations %}
+        <option value="{{ operation }}">{{ operation }}</option>
+        {% endfor %}
+
+    </select>
+    Second number <input name="second_num" type="text">
+
+    <button>submit</button>
+</form>
+
+<p style="color : red"> {{ msg }} </p>
+<p style="color : green"> {{ result }} </p>
+
+
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}
